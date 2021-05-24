@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    FlexibleGrid grid;
+    public FlexibleGrid grid;
 
     CellObj cell;
 
@@ -13,7 +13,6 @@ public class Arrow : MonoBehaviour
     void Start()
     {
         cell = transform.parent.gameObject.GetComponent<CellObj>();
-        grid = GameObject.Find("layout").GetComponent<FlexibleGrid>();
         rect = GetComponent<RectTransform>();
     }
 
@@ -22,20 +21,21 @@ public class Arrow : MonoBehaviour
     {
         rect.sizeDelta = new Vector2(grid.cellSize.y / 2, grid.cellSize.x / 2);
 
-        if(cell.cell.bestAction == MDP.Action.down)
+        switch (cell.cell.bestAction)
         {
-            rect.rotation = Quaternion.Euler(0, 0, 0);
-        } else if (cell.cell.bestAction == MDP.Action.right)
-        {
-            rect.rotation = Quaternion.Euler(0, 0, 90);
+            case MDP.Action.down:
+                rect.rotation = Quaternion.Euler(0, 0, 0);
+                break;
+            case MDP.Action.right:
+                rect.rotation = Quaternion.Euler(0, 0, 90);
+                break;
+            case MDP.Action.up:
+                rect.rotation = Quaternion.Euler(0, 0, 180);
+                break;
+            case MDP.Action.left:
+                rect.rotation = Quaternion.Euler(0, 0, 270);
+                break;
         }
-        else if (cell.cell.bestAction == MDP.Action.up)
-        {
-            rect.rotation = Quaternion.Euler(0, 0, 180);
-        }
-        else if (cell.cell.bestAction == MDP.Action.left)
-        {
-            rect.rotation = Quaternion.Euler(0, 0, 270);
-        }
+        
     }
 }

@@ -8,6 +8,7 @@ using TMPro;
 public class CellObj : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
 {
     public Cell cell = new Cell();
+
     public MDP mdp;
 
     public bool arrow = false;
@@ -16,15 +17,13 @@ public class CellObj : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
 
     void Start()
     {
-        mdp = GameObject.Find("MDP").GetComponent<MDP>();
-
         cell.value = 0;
         cell.cellType = CellType.neutral;
         cell.reward = mdp.penalty;
         cell.bestAction = MDP.Action.up;
 
         this.transform.GetChild(0).GetComponent<TMP_Text>().text = cell.value.ToString();
-        StartCoroutine("UPD");
+        StartCoroutine(UpdateGuiValue());
     }
 
     void Update()
@@ -47,8 +46,9 @@ public class CellObj : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
         }
     }
 
-
-    IEnumerator UPD()
+    
+    //Corutine -> because of gui animation if it would take a lot of iterations of MDP
+    IEnumerator UpdateGuiValue()
     {
         while (true)
         {

@@ -474,6 +474,14 @@ PrefabInstance:
       propertyPath: layout
       value: 
       objectReference: {fileID: 1190985860}
+    - target: {fileID: 1268253570409733818, guid: 5060035b565191f419c3d71476979844, type: 3}
+      propertyPath: rows
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268253570409733818, guid: 5060035b565191f419c3d71476979844, type: 3}
+      propertyPath: columns
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1268253570409733819, guid: 5060035b565191f419c3d71476979844, type: 3}
       propertyPath: m_Name
       value: MDP

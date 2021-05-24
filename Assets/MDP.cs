@@ -23,6 +23,7 @@ public class MDP : MonoBehaviour
     public int badReward = -100;
 
     public GameObject cellPrefab;
+
     public Transform layout;
 
     private CellObj[,] table;
@@ -42,6 +43,7 @@ public class MDP : MonoBehaviour
             {
                 GameObject newCell = Instantiate(cellPrefab, layout);
                 newCell.name = "cell " + i + " " + j;
+                newCell.transform.GetChild(1).GetComponent<Arrow>().grid = layout.gameObject.GetComponent<FlexibleGrid>();
                 table[i, j] = newCell.GetComponent<CellObj>();
             }
         }
@@ -137,11 +139,8 @@ public class MDP : MonoBehaviour
                             }
                         }
                         
-
-
-                        float probabilitiesFortheOtherDirections = 0;
                         
-                        probabilitiesFortheOtherDirections = (1 - probability) / (possibleActions.Count - 1);
+                        float probabilitiesFortheOtherDirections = (1 - probability) / (possibleActions.Count - 1);
                         float v = 0;
 
                         CellObj u, d, l, r;
